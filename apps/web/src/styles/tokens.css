@@ -1,0 +1,93 @@
+/*
+ * Tokens visuales del Centro de control. Paleta 60 / 30 / 10:
+ *   60 %  Marfil Antiguo  -> fondos y tarjetas (tema claro)
+ *   30 %  Negro Piano     -> barra lateral, texto, botones y lienzo neuronal
+ *   10 %  Turquesa Surf   -> acento #00C2B5 (RGB 0, 194, 181), solo para énfasis
+ * El turquesa puro no tiene contraste suficiente como texto sobre marfil, por eso
+ * --pr (texto/acento sobre fondo claro) usa una versión oscura; --ac es el turquesa de marca.
+ */
+:root {
+  --ivory: #f3eee3;
+  --piano: #14171a;
+  --surf: #00c2b5;
+
+  --l0: #f3eee3;
+  --l1: #fbf9f4;
+  --l2: #ebe5d7;
+  --l3: #fffdf8;
+  --bd: #d9d2c1;
+  --sf: #fbf9f4;
+  --tx: #14171a;
+  --mu: #55595c;
+  --su: #666a6d;
+  --ac: #00c2b5;
+  --pr: #00706a;
+  --prs: #d6eee7;
+  --gr: #2e7d5b;
+  --grs: #dcebdd;
+  --am: #8a5a0b;
+  --ams: #f3e3bf;
+  --rd: #a3423b;
+  --vi: #2a2f33;
+  --vis: #e4e0d4;
+  --act: #14171a;
+  --actx: #f3eee3;
+  --sh: 0 1px 2px rgba(20, 23, 26, 0.05), 0 8px 24px rgba(20, 23, 26, 0.05);
+  --cvbg: #14171a;
+
+  /* barra lateral: clara en tema claro (el logo de Junior's Sparks para fondo claro) y Negro Piano en oscuro */
+  --sb-bg: #fbf9f4;
+  --sb-tx: #14171a;
+  --sb-mu: #5b6165;
+  --sb-su: #6f767a;
+  --sb-bd: #e3dccb;
+  --sb-hover: rgba(20, 23, 26, 0.05);
+  --sb-hover2: rgba(20, 23, 26, 0.09);
+  --sb-active: rgba(0, 194, 181, 0.16);
+
+  /* lienzo de la red neuronal (siempre sobre fondo oscuro) */
+  --cv-pr: #00c2b5;
+  --cv-vi: #e9e3d3;
+  --cv-gr: #7ef2e8;
+  --cv-mu: #a3a8aa;
+  --cv-am: #e5b567;
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --l0: #0e1012;
+  --l1: #171a1d;
+  --l2: #1f2326;
+  --l3: #292e32;
+  --bd: #2e3338;
+  --sf: #14171a;
+  --tx: #f3eee3;
+  --mu: #a9adad;
+  --su: #8a8f92;
+  --pr: #00c2b5;
+  --prs: #0f2f2d;
+  --gr: #6fd3a5;
+  --grs: #17302a;
+  --am: #e5b567;
+  --ams: #33291a;
+  --rd: #f0928a;
+  --vi: #d8d2c2;
+  --vis: #2a2d2e;
+  --act: #00c2b5;
+  --actx: #0e1012;
+  --sh: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --cvbg: #0a0c0d;
+  --sb-bg: #101315;
+  --sb-tx: #f3eee3;
+  --sb-mu: #a3a8aa;
+  --sb-su: #80868a;
+  --sb-bd: #22272b;
+  --sb-hover: rgba(243, 238, 227, 0.06);
+  --sb-hover2: rgba(243, 238, 227, 0.1);
+  --sb-active: rgba(0, 194, 181, 0.14);
+  color-scheme: dark;
+}

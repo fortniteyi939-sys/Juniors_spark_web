@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EduMaster.ai | Centro de control (DEMO)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--l0:#eef3f7;--l1:rgba(255,255,255,.88);--l2:#f1f6f9;--l3:#fff;--bd:#d6e1e9;--sf:#fff;--tx:#12233b;--mu:#536a80;--su:#697f93;--pr:#087b80;--prs:#def4f2;--gr:#166a43;--grs:#def3e7;--am:#93560b;--ams:#fff0d5;--rd:#a8443f;--vi:#7654ad;--vis:#f1eafb;--act:#087b80;--actx:#faffff;--sh:0 2px 6px rgba(18,35,59,.04),0 12px 32px rgba(18,35,59,.04);--cvbg:#f8fafc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+:root[data-theme=dark]{--l0:#060a10;--l1:rgba(13,19,29,.84);--l2:#131c29;--l3:#1a2636;--bd:#202e3e;--sf:#0e141e;--tx:#f4f7fb;--mu:#99a9bf;--su:#7f91a9;--pr:#86f6f2;--prs:#143234;--gr:#9ce8c2;--grs:#193329;--am:#ffcf83;--ams:#392d1f;--rd:#ffaaa3;--vi:#c9adff;--vis:#2c263e;--act:#86f6f2;--actx:#020617;--sh:0 2px 6px rgba(0,0,0,.24);--cvbg:#0a1019;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--l0);color:var(--tx);font:13px/1.5 Manrope,Arial,sans-serif;min-height:100dvh}
+:focus-visible{outline:2px solid var(--pr);outline-offset:3px}
+/* sidebar */
+aside{position:fixed;inset:0 auto 0 0;width:252px;background:var(--sf);border-right:1px solid var(--bd);display:flex;flex-direction:column;z-index:5;overflow:hidden}
+aside::before{content:"";position:absolute;inset:0 0 auto;height:200px;background:radial-gradient(ellipse at 15% 0%,color-mix(in srgb,var(--pr) 8%,transparent),transparent 75%);pointer-events:none}
+aside>*{position:relative}
+.brand{min-height:83px;padding:21px;display:flex;align-items:center;gap:11px}
+.bi{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:var(--prs);color:var(--pr);border:1px solid color-mix(in srgb,var(--pr) 22%,var(--bd))}
+.brand strong{display:block;font-size:14px;font-weight:800;letter-spacing:.3px}.brand strong span{font-weight:500}.brand small{color:var(--su);font-size:8px;letter-spacing:1.2px}
+.ws{margin:0 15px 18px;padding:12px 10px;display:flex;align-items:center;gap:9px;border:1px solid var(--bd);border-radius:9px}
+.ws i{width:30px;height:30px;border-radius:7px;background:var(--l2);display:grid;place-items:center;font-style:normal;font-weight:800;color:var(--pr)}
+.ws span{flex:1}.ws strong{display:block;font-size:10px}.ws small{font-size:8px;color:var(--mu)}.ws b{width:7px;height:7px;border-radius:50%;background:var(--gr)}
+nav{flex:1;overflow-y:auto;padding:4px 12px 15px}
+.lb{display:block;padding:0 12px 6px;font-size:8px;font-weight:700;letter-spacing:1.1px;color:var(--su);margin-top:12px}
+nav a{display:flex;align-items:center;min-height:38px;padding:8px 11px;margin:2px 0;border-radius:7px;font-size:12px;font-weight:550;color:var(--mu);text-decoration:none}
+nav a:hover{background:var(--l2);color:var(--tx)}
+nav a.on{color:var(--pr);background:linear-gradient(90deg,var(--prs),color-mix(in srgb,var(--prs) 45%,transparent));font-weight:700}
+/* main */
+main{margin-left:252px;padding:24px 28px 40px;min-width:0}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.top .sp{flex:1}.pill{padding:6px 11px;border-radius:9999px;font-size:10px;font-weight:750;border:1px solid var(--bd);background:var(--l2);color:var(--mu)}
+.conn{color:var(--gr);background:var(--grs);border-color:transparent}
+.ph{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.pi{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;color:var(--pr);background:linear-gradient(135deg,var(--prs),var(--sf));border:1px solid color-mix(in srgb,var(--pr) 22%,var(--bd))}
+.eb{font-size:10px;text-transform:uppercase;letter-spacing:.13em;font-weight:750;color:var(--pr)}
+h1{margin:4px 0 6px;font-size:clamp(23px,2.5vw,32px);letter-spacing:-.04em;line-height:1.2}
+.ph p{margin:0;color:var(--mu)}.ph .ac{margin-left:auto;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select,input[type=range]{font:inherit;color:var(--tx)}
+select{background:var(--l2);border:1px solid var(--bd);border-radius:9999px;padding:8px 14px}
+.btn{background:var(--act);color:var(--actx);border:0;border-radius:9999px;padding:8px 16px;font:700 12px Manrope,sans-serif;cursor:pointer}
+.btn.g{background:var(--l2);color:var(--tx);border:1px solid var(--bd)}
+.btn.sm{padding:5px 11px;font-size:11px}
+.seg{display:inline-flex;padding:4px;border:1px solid var(--bd);background:var(--l2);border-radius:9999px;gap:2px}
+.seg button{border:0;background:none;color:var(--mu);padding:6px 12px;border-radius:9999px;font:600 11px Manrope,sans-serif;cursor:pointer}
+.seg button.on{background:var(--l3);color:var(--tx);border:1px solid var(--bd);box-shadow:var(--sh)}
+/* cards */
+.kp{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.card{background:var(--l1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--bd);border-radius:22px;box-shadow:var(--sh);padding:20px;min-width:0}
+.m{position:relative;overflow:hidden;display:grid;gap:6px;padding:18px 20px}
+.m::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--pr)}
+.m.g::before{background:var(--gr)}.m.v::before{background:var(--vi)}.m.a::before{background:var(--am)}
+.m span,.m small{font-size:10px;color:var(--mu)}.m strong{font-size:21px;letter-spacing:-.7px;line-height:1.1}
+.m .up{color:var(--gr);font-weight:700}.m .dn{color:var(--rd);font-weight:700}
+.gd{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.c8{grid-column:span 8}.c4{grid-column:span 4}.c6{grid-column:span 6}
+.card h2{margin:0 0 4px;font-size:15px;letter-spacing:-.02em}.card .sub{margin:0 0 14px;font-size:11px;color:var(--mu)}
+.nnh{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:11px;color:var(--mu)}
+.ctl label{display:flex;gap:6px;align-items:center}
+.state{display:inline-flex;gap:7px;align-items:center;padding:7px 12px;border-radius:9999px;background:var(--prs);color:var(--pr);font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.4px}
+.state i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.state.t{background:var(--ams);color:var(--am)}
+canvas{width:100%;height:320px;display:block;border-radius:16px;background:var(--cvbg);border:1px solid var(--bd)}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:12px}
+.st div{background:var(--l2);border-radius:12px;padding:8px 12px;font-size:10px;color:var(--mu)}.st b{display:block;font-size:13px;color:var(--tx)}
+.insp{margin-top:10px;font-size:11px;color:var(--mu)}
+.dn2{width:150px;height:150px;border-radius:50%;margin:8px auto 12px;display:grid;place-items:center}
+.dn2 span{width:106px;height:106px;border-radius:50%;background:var(--sf);display:grid;place-items:center;font-size:24px;font-weight:800;letter-spacing:-.04em}
+.lg{font-size:11px;color:var(--mu);margin-top:8px}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin:0 4px 0 8px;vertical-align:-1px}
+.hw{overflow-x:auto}.heat{display:grid;grid-template-columns:120px repeat(5,minmax(52px,1fr));gap:4px;min-width:440px;font-size:10px}
+.heat span{align-self:center;color:var(--mu)}.heat em{font-style:normal;border-radius:8px;height:28px;display:grid;place-items:center;font-weight:700;color:var(--tx)}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+li.r{padding:14px;border-radius:16px;background:var(--l2);border:1px solid var(--bd);border-left:3px solid var(--vi)}
+li.r b{font-size:13px}li.r small{display:block;color:var(--mu);margin-top:2px}.r .bt{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+li.a{display:flex;gap:12px;padding-bottom:10px;border-bottom:1px solid var(--bd);font-size:12px}li.a time{color:var(--su);min-width:60px;font-size:11px}
+@media(max-width:1100px){.kp{grid-template-columns:repeat(3,1fr)}.c8,.c4,.c6{grid-column:span 12}}
+@media(max-width:800px){aside{display:none}main{margin-left:0;padding:16px}.kp{grid-template-columns:repeat(2,1fr)}.ph .ac{margin-left:0}}
+</style>
+</head>
+<body>
+<aside aria-label="Navegación principal">
+<div class="brand"><div class="bi"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="19" cy="16" r="2"/><path d="M7 6l3.5 5M7 18l3.5-5M14 11l3.5-2M14 13l3.5 2"/></svg></div><div><strong>EduMaster<span>.ai</span></strong><small>CENTRO DE CONTROL</small></div></div>
+<div class="ws"><i>E</i><span><strong>Institución DEMO</strong><small>Datos sintéticos</small></span><b></b></div>
+<nav>
+<span class="lb">PRINCIPAL</span><a class="on" href="#resumen">Resumen</a><a href="#rutas">Rutas de aprendizaje</a><a href="#cursos">Cursos</a><a href="#evals">Evaluaciones</a><a href="#certs">Certificados</a>
+<span class="lb">INTELIGENCIA</span><a href="#analitica">Analítica</a><a href="#tutor">IA Tutor</a><a href="#skills">Dominio de habilidades</a><a href="#red">Red neuronal</a>
+<span class="lb">SISTEMA</span><a href="#comunidad">Comunidad</a><a href="#admin">Administración</a><a href="#auditoria">Auditoría</a>
+</nav>
+</aside>
+
+<main>
+<div class="top"><span class="pill">Datos DEMO</span><span class="pill conn" id="conn">● Conectado</span><span class="sp"></span>
+<div class="seg" id="theme" role="group" aria-label="Tema"><button data-t="light" class="on">Claro</button><button data-t="dark">Oscuro</button></div></div>
+
+<div class="ph" id="resumen"><div class="pi"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg></div>
+<div><div class="eb">Resumen ejecutivo</div><h1>Aprendizaje y analítica</h1><p>Progreso, competencias y recomendaciones de IA de tu institución.</p></div>
+<div class="ac"><select id="per" aria-label="Periodo"><option value="7">7 días</option><option value="30" selected>30 días</option><option value="90">90 días</option></select><select id="role" aria-label="Rol"><option value="inst">Administrador</option><option value="doc">Docente</option><option value="est">Estudiante</option></select><select id="crs" aria-label="Curso"><option>Todos los cursos</option><option>Matemática I</option><option>Programación</option><option>Estadística</option></select><button class="btn" id="exp">Exportar CSV</button></div></div>
+
+<div class="kp" id="kp"></div>
+
+<div class="gd">
+<section class="card c8" id="red">
+<div class="nnh"><div><h2>Red neuronal multitarea</h2><p class="sub" style="margin:0">Pulsos sobre conexiones reales del grafo. Animación de demostración.</p></div><span class="state" id="sb"><i></i><span id="sl">Inferencia</span></span></div>
+<div class="ctl" style="margin-bottom:12px"><div class="seg" id="mode" role="group" aria-label="Estado"><button data-s="inf" class="on">Inferencia</button><button data-s="trn">Entrenamiento</button><button data-s="idle">Detenido</button></div>
+<button class="btn g sm" id="bp">Pausar</button><button class="btn g sm" id="br">Reiniciar</button><label>Velocidad <input id="sp" type="range" min=".3" max="3" step=".1" value="1"></label><label><input type="checkbox" id="wt"> Pesos</label></div>
+<canvas id="cv" role="img" aria-label="Red neuronal animada (demostración)"></canvas>
+<div class="st"><div>Modelo<b>mtl-demo</b></div><div>Versión<b>v0.1-DEMO</b></div><div>Dataset<b>demo_sint_2026.11</b></div><div>Época<b id="ep">0 / 40</b></div><div>Loss<b id="ls">—</b></div></div>
+<div class="insp" id="in">Pasa el cursor sobre una capa para ver su detalle.</div></section>
+
+<section class="card c4"><h2>Finalización de cursos</h2><p class="sub">Completado, en curso y sin iniciar</p><div class="dn2" id="dn"><span id="dv"></span></div>
+<div class="lg"><i style="background:var(--gr)"></i>Completado<i style="background:var(--pr)"></i>En curso<i style="background:var(--l3);border:1px solid var(--bd)"></i>Sin iniciar</div></section>
+
+<section class="card c6" id="analitica"><h2>Progreso de aprendizaje</h2><p class="sub">Horas activas y actividades completadas</p><svg id="tc" viewBox="0 0 560 200" width="100%" role="img" aria-label="Tendencia"></svg>
+<div class="lg"><i style="background:var(--pr)"></i>Horas activas<i style="background:var(--vi)"></i>Actividades completadas</div></section>
+
+<section class="card c6"><h2>Dominio de habilidades</h2><p class="sub">Nivel estimado por IA, no certificado por docente</p><div class="hw"><div class="heat" id="ht"></div></div></section>
+
+<section class="card c6" id="tutor"><h2>Recomendaciones de IA</h2><p class="sub">Estimaciones del modelo v0.1-DEMO, no son diagnósticos</p><ul id="rl"></ul></section>
+<section class="card c6"><h2>Actividad reciente</h2><p class="sub">Eventos en tiempo simulado</p><ul id="al"></ul></section>
+</div>
+</main>
+
+<script>
+const $=i=>document.getElementById(i),rnd=(a,b)=>Math.round(a+Math.random()*(b-a));
+const R=document.documentElement;
+/* tema */
+let C={};function cols(){const s=getComputedStyle(R),g=n=>s.getPropertyValue(n).trim();C={pr:g('--pr'),vi:g('--vi'),gr:g('--gr'),mu:g('--mu'),am:g('--am')}}
+$('theme').onclick=e=>{const b=e.target.closest('button');if(!b)return;R.dataset.theme=b.dataset.t;[...$('theme').children].forEach(x=>x.classList.toggle('on',x===b));cols();trend()};
+if(matchMedia('(prefers-color-scheme: dark)').matches)$('theme').querySelector('[data-t=dark]').click();
+/* KPIs */
+const base={inst:[2481,36,12940,812,68,.81],doc:[142,4,980,57,72,.81],est:[1,5,64,2,46,.81]};
+const defs=[['Estudiantes activos','','Eventos DEMO','+4.2%',1],['Cursos','g','Catálogo DEMO','+2',1],['Horas de aprendizaje','','learning_events DEMO','+8.1%',1],['Certificaciones','v','certificates DEMO','+11%',1],['Finalización','a','Agregados DEMO','−1.3 pp',0],['AUC del modelo','v','Validación DEMO','+0.02',1]];
+function kpis(){
+ const b=base[$('role').value],m=({7:.25,30:1,90:2.6})[$('per').value];
+ const v=[b[0].toLocaleString('es-PE'),b[1],Math.round(b[2]*m).toLocaleString('es-PE'),Math.round(b[3]*m),b[4]+'%',b[5].toFixed(2)];
+ const t=new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'});
+ $('kp').innerHTML=defs.map((d,i)=>`<article class="card m ${d[1]}"><span>${d[0]}</span><strong>${v[i]}</strong><small class="${d[4]?'up':'dn'}">${d[3]} vs. periodo anterior</small><small>${d[2]} · ${t}</small></article>`).join('');
+ const p=b[4];$('dv').textContent=p+'%';$('dn').style.background=`conic-gradient(var(--gr) 0 ${p}%,var(--pr) ${p}% ${p+20}%,var(--l3) ${p+20}% 100%)`;
+ trend();
+}
+function trend(){
+ const n=({7:7,30:15,90:24})[$('per').value];
+ const ln=(c,a,o)=>{let p=[];for(let i=0;i<n;i++)p.push((20+i*520/(n-1))+','+(170-(30+o+i*60/n+Math.sin(i*.9+o)*a+Math.random()*8)).toFixed(1));return `<polyline fill="none" stroke="${c}" stroke-width="2.5" stroke-linejoin="round" points="${p.join(' ')}"/>`};
+ let g='';for(let i=0;i<5;i++)g+=`<line x1="20" x2="540" y1="${30+i*35}" y2="${30+i*35}" stroke="currentColor" opacity=".1"/>`;
+ $('tc').innerHTML=g+ln(C.pr,10,10)+ln(C.vi,8,0);
+}
+const sk=['Álgebra','Lógica','Programación','Estadística','Comunicación'],lv=['Principiante','Elemental','Intermedio','Avanzado','Experto'];
+function heat(){let h='<span></span>'+lv.map(l=>`<span>${l}</span>`).join('');sk.forEach(s=>{h+=`<span>${s}</span>`;const w=Array.from({length:5},()=>Math.random()),t=w.reduce((a,b)=>a+b);w.forEach(x=>{const p=Math.round(x/t*100);h+=`<em style="background:color-mix(in srgb,var(--pr) ${Math.round(12+x/t*160)}%,var(--l2))" title="${s}: ${p}%">${p}%</em>`})});$('ht').innerHTML=h}
+const recs=[['Reforzar álgebra lineal','Brecha en Álgebra; última evaluación 54%. Dificultad estimada: media.'],['Repetir práctica de funciones','3 intentos recientes sin completar. Actividad previa: Taller 4.'],['Continuar ruta: Estadística','Cumples el prerrequisito; objetivo de la ruta en 12 días.']];
+$('rl').innerHTML=recs.map((r,i)=>`<li class="r" id="r${i}"><b>${r[0]}</b><small>${r[1]}</small><div class="bt"><button class="btn sm" data-i="${i}" data-a="Aceptada">Aceptar</button><button class="btn g sm" data-i="${i}" data-a="Descartada">Descartar</button><button class="btn g sm" data-i="${i}" data-a="Útil">Marcar útil</button></div></li>`).join('');
+$('rl').onclick=e=>{const b=e.target.closest('button');if(!b)return;const li=$('r'+b.dataset.i);li.style.borderLeftColor='var(--gr)';li.querySelector('.bt').innerHTML=`<span class="pill conn">${b.dataset.a} · feedback registrado (DEMO)</span>`;log('Recomendación '+b.dataset.a.toLowerCase())};
+const ev=['Entrega recibida: Taller 4','Lección vista: Funciones','Certificado emitido','Evaluación enviada','Curso completado','Nueva recomendación'];
+function log(t){const li=document.createElement('li');li.className='a';li.innerHTML=`<time>${new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit',second:'2-digit'})}</time><span>${t}</span>`;$('al').prepend(li);while($('al').children.length>6)$('al').lastChild.remove()}
+for(let i=0;i<4;i++)log(ev[i]);setInterval(()=>log(ev[rnd(0,5)]+' (DEMO)'),4500);
+$('exp').onclick=()=>{const rows=[['indicador','valor','periodo','filtro','generado'],...defs.map((d,i)=>[d[0],$('kp').children[i].querySelector('strong').textContent,$('per').value+'d',$('crs').value,new Date().toISOString()])];const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));a.download='edumaster_demo.csv';a.click();log('Exportación CSV auditada')};
+/* red neuronal */
+const L=[{n:'Entrada',k:8,c:'pr',d:'Actividad, intentos, progreso · [B,8]'},{n:'Embeddings',k:6,c:'pr',d:'Vector de características · [B,32]'},{n:'GRU',k:7,c:'vi',d:'Secuencia de eventos · [B,T,64]'},{n:'Fusión Dense',k:6,c:'pr',d:'Concat + Dense + LayerNorm + Dropout · [B,64]'},{n:'Salidas',k:4,c:'gr',d:'Finalización · Dominio · Riesgo · Ranking'}];
+const cv=$('cv'),cx=cv.getContext('2d');let W,H,nodes=[],edges=[],pulses=[],run=true,hov=-1,last=0;
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){run=false;$('bp').textContent='Reanudar'}
+function layout(){const r=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);nodes=[];edges=[];L.forEach((l,i)=>{for(let j=0;j<l.k;j++)nodes.push({l:i,x:50+i*(W-100)/4,y:30+(j+.5)*(H-60)/l.k})});nodes.forEach((a,i)=>nodes.forEach((b,j)=>{if(b.l===a.l+1)edges.push({a:i,b:j,w:Math.random()*2-1})}))}
+function draw(ts){
+ const dt=Math.min(50,ts-last);last=ts;const sp=+$('sp').value,s=$('mode').querySelector('.on').dataset.s,wt=$('wt').checked;
+ cx.clearRect(0,0,W,H);
+ edges.forEach(e=>{const a=nodes[e.a],b=nodes[e.b];cx.globalAlpha=wt?.25+Math.abs(e.w)*.6:.22;cx.strokeStyle=wt&&e.w<0?C.vi:C.pr;cx.lineWidth=wt?.5+Math.abs(e.w)*1.5:.8;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()});cx.globalAlpha=1;
+ if(run&&s!=='idle')for(let i=0;i<Math.ceil(sp*2);i++)if(Math.random()<.5)pulses.push({e:edges[rnd(0,edges.length-1)],t:0,rev:s==='trn'});
+ pulses=pulses.filter(p=>{p.t+=dt/900*sp;if(p.t>=1)return false;const a=nodes[p.e.a],b=nodes[p.e.b],u=p.rev?1-p.t:p.t;cx.fillStyle=p.rev?C.am:C.pr;cx.beginPath();cx.arc(a.x+(b.x-a.x)*u,a.y+(b.y-a.y)*u,2.8,0,7);cx.fill();return true});
+ nodes.forEach((n,i)=>{cx.fillStyle=C[L[n.l].c];cx.globalAlpha=s==='idle'?.4:.4+.6*Math.abs(Math.sin(ts/700+i));cx.beginPath();cx.arc(n.x,n.y,hov===n.l?8:6,0,7);cx.fill()});cx.globalAlpha=1;
+ cx.fillStyle=C.mu;cx.font='600 11px Manrope,sans-serif';cx.textAlign='center';L.forEach((l,i)=>cx.fillText(l.n+' ('+l.k+')',50+i*(W-100)/4,H-8));
+ if(s==='trn'&&run){const e=Math.floor(ts/600)%41;$('ep').textContent=e+' / 40';$('ls').textContent=(1.2*Math.exp(-e/12)+.2).toFixed(3)}
+ requestAnimationFrame(draw)}
+cv.onmousemove=e=>{const x=e.clientX-cv.getBoundingClientRect().left;let b=-1,d=1e9;L.forEach((l,i)=>{const dd=Math.abs(x-(50+i*(W-100)/4));if(dd<d){d=dd;b=i}});hov=d<40?b:-1;$('in').textContent=hov>=0?`${L[hov].n}: ${L[hov].k} neuronas (resumen) · ${L[hov].d}`:'Pasa el cursor sobre una capa para ver su detalle.'};
+$('bp').onclick=()=>{run=!run;$('bp').textContent=run?'Pausar':'Reanudar'};
+$('br').onclick=()=>{pulses=[];layout()};
+$('mode').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('mode').children].forEach(x=>x.classList.toggle('on',x===b));$('sl').textContent={inf:'Inferencia',trn:'Entrenando (demo)',idle:'Detenido'}[b.dataset.s];$('sb').classList.toggle('t',b.dataset.s==='trn');if(b.dataset.s!=='trn'){$('ep').textContent='0 / 40';$('ls').textContent='—'}};
+['per','role','crs'].forEach(i=>$(i).onchange=()=>{kpis();heat();log('Filtros aplicados: '+$('crs').value)});
+document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>{document.querySelectorAll('nav a').forEach(x=>x.classList.remove('on'));a.classList.add('on')});
+addEventListener('resize',layout);
+addEventListener('offline',()=>$('conn').textContent='○ Sin conexión');addEventListener('online',()=>$('conn').textContent='● Conectado');
+cols();kpis();heat();layout();requestAnimationFrame(draw);
+</script>
+</body>
+</html>
